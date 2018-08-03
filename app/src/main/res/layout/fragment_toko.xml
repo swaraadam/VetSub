@@ -3,7 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.TokoFragment">
+    tools:context=".fragment.TokoFragment"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/bt_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimaryDark"
+        android:text="map"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,12 +28,6 @@
             android:layout_marginRight="12dp"
             android:clipToPadding="false">
         </android.support.v7.widget.RecyclerView>
-        <Button
-            android:id="@+id/bt_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="map"/>
     </RelativeLayout>
 
 </LinearLayout>
