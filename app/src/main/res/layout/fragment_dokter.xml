@@ -19,15 +19,7 @@
             android:layout_marginRight="12dp"
             android:clipToPadding="false">
         </android.support.v7.widget.RecyclerView>
-        <ImageView
-            android:id="@+id/iv_map"
-            android:src="@drawable/ic_map"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:text="map"/>
         <Button
-            android:visibility="gone"
             android:id="@+id/bt_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
