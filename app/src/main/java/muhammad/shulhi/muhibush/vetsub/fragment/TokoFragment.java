@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -31,10 +32,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import muhammad.shulhi.muhibush.vetsub.R;
+import muhammad.shulhi.muhibush.vetsub.activity.LoginActivity;
 import muhammad.shulhi.muhibush.vetsub.activity.MapsActivityToko;
 import muhammad.shulhi.muhibush.vetsub.activity.ProfileActivityToko;
 import muhammad.shulhi.muhibush.vetsub.model.Toko;
 import muhammad.shulhi.muhibush.vetsub.services.ApiServices;
+import muhammad.shulhi.muhibush.vetsub.sharedPref.SharedPrefLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,6 +53,8 @@ public class TokoFragment extends Fragment {
     private Activity activity;
     private ArrayList<Toko> listTokoOriginal = new ArrayList<>();
     private ArrayList<Toko> listTokoFilter = new ArrayList<>();
+    private Button btnLogout;
+    private SharedPrefLogin sharedPrefLogin;
 
     public TokoFragment() {
         // Required empty public constructor
@@ -74,6 +79,17 @@ public class TokoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_toko, container, false);
         rvToko = (RecyclerView) view.findViewById(R.id.rv_toko);
+        sharedPrefLogin = new SharedPrefLogin(getActivity());
+        btnLogout = (Button) view.findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedPrefLogin.clear();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         setHasOptionsMenu(true);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
