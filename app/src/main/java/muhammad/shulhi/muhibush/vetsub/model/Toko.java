@@ -2,11 +2,12 @@ package muhammad.shulhi.muhibush.vetsub.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Toko {
+public class Toko{
     private String _id;
     private String nama;
     private String email;
@@ -18,6 +19,15 @@ public class Toko {
     private Date updateAt;
     private Jam jam;
     private Posisi posisi;
+    private String search;
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
 
     public String get_id() {
         return _id;

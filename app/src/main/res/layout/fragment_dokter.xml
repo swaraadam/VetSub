@@ -3,20 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.DokterFragment"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/bt_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimaryDark"
-        android:text="map"/>
 
-    <RelativeLayout
+    <FrameLayout
+        android:translationZ="2dp"
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:titleTextColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:theme="@style/MaterialSearchViewStyle"/>
+    </FrameLayout>
+
+    <FrameLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
 
@@ -28,6 +42,22 @@
             android:layout_marginRight="12dp"
             android:clipToPadding="false">
         </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_map"
+            android:layout_margin="10dp"
+            android:layout_gravity="end|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profile_circular_border_imageview">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_map"
+                android:padding="5dp"/>
+        </RelativeLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -1,20 +1,28 @@
 package muhammad.shulhi.muhibush.vetsub.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import net.idik.lib.slimadapter.SlimAdapter;
 import net.idik.lib.slimadapter.SlimInjector;
@@ -25,7 +33,6 @@ import java.util.List;
 
 import muhammad.shulhi.muhibush.vetsub.R;
 import muhammad.shulhi.muhibush.vetsub.activity.MapsActivityDokter;
-import muhammad.shulhi.muhibush.vetsub.activity.MapsActivityToko;
 import muhammad.shulhi.muhibush.vetsub.activity.ProfileActivityToko;
 import muhammad.shulhi.muhibush.vetsub.model.Dokter;
 import muhammad.shulhi.muhibush.vetsub.services.ApiServices;
@@ -37,15 +44,30 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class DokterFragment extends Fragment {
-    private SlimAdapter saEvent;
+    private SlimAdapter slimAdapter;
+    private MaterialSearchView searchView;
     private RecyclerView rvDokter;
-    private Button btMap;
+    private RelativeLayout rlMap;
+    private Activity activity;
     private ArrayList<Dokter> listDokterOriginal;
-
-
+    private ArrayList<Dokter> listDokterFilter = new ArrayList<>();
 
     public DokterFragment() {
         // Required empty public constructor
+    }
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof Activity) {
+            this.activity = (Activity) activity;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
     }
 
 
@@ -55,8 +77,48 @@ public class DokterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dokter, container, false);
         rvDokter = (RecyclerView) view.findViewById(R.id.rv_dokter);
-        btMap = (Button) view.findViewById(R.id.bt_map);
-        btMap.setOnClickListener(new View.OnClickListener() {
+
+
+
+        setHasOptionsMenu(true);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        searchView = (MaterialSearchView) view.findViewById(R.id.search_view);
+        ((AppCompatActivity) activity).setSupportActionBar(toolbar);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Boolean found = false;
+                listDokterFilter.clear();
+                ArrayList<Dokter> Filter = new ArrayList<>();
+                ArrayList<Dokter> UnFilter = new ArrayList<>();
+
+                for (Dokter toko:listDokterOriginal){
+                    if (toko.getAlamat().toLowerCase().contains(query.toLowerCase())){
+                        Filter.add(toko);
+                        found = true;
+                    }
+                    else{
+                        UnFilter.add(toko);
+                    }
+                }
+                listDokterFilter.addAll(Filter);
+                listDokterFilter.addAll(UnFilter);
+                displayDokterRecycler(listDokterFilter);
+
+                if (!found){
+                    Toast.makeText(activity,"Toko dengan Alamat "+query.toString()+" tidak ditemukan",Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        rlMap = (RelativeLayout) view.findViewById(R.id.rl_map);
+        rlMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MapsActivityDokter.class);
@@ -72,12 +134,13 @@ public class DokterFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Dokter>> call, Response<ArrayList<Dokter>> response) {
                 listDokterOriginal = response.body();
-                displayDokterRecycler(listDokterOriginal);
+                listDokterFilter.addAll(listDokterOriginal);
+                displayDokterRecycler(listDokterFilter);
             }
 
             @Override
             public void onFailure(Call<ArrayList<Dokter>> call, Throwable t) {
-                Toast.makeText(getContext(), "Connection trouble", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Connection trouble", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -86,7 +149,7 @@ public class DokterFragment extends Fragment {
         rvDokter.setNestedScrollingEnabled(false);
         rvDokter.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         rvDokter.setFocusable(false);
-        saEvent = SlimAdapter.create()
+        slimAdapter = SlimAdapter.create()
                 .register(R.layout.item_toko, new SlimInjector<Dokter>() {
                     @Override
                     public void onInject(final Dokter data, IViewInjector injector) {
@@ -117,8 +180,8 @@ public class DokterFragment extends Fragment {
                                 });
                     }
                 }).attachTo(rvDokter);
-        saEvent.updateData(listTokoFiltered);
-        saEvent.notifyDataSetChanged();
+        slimAdapter.updateData(listTokoFiltered);
+        slimAdapter.notifyDataSetChanged();
     }
 
 }
