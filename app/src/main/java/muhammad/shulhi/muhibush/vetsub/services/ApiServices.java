@@ -46,6 +46,14 @@ public class ApiServices {
                 @Field("email") String email,
                 @Field("password") String password
         );
+
+        @FormUrlEncoded
+        @POST("signup/client")
+        Call<User> register(
+                @Field("nama") String nama,
+                @Field("email") String email,
+                @Field("password") String password
+        );
     }
 
     public interface GetService {
