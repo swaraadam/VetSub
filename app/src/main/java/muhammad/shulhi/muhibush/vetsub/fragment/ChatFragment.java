@@ -1,15 +1,13 @@
 package muhammad.shulhi.muhibush.vetsub.fragment;
 
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaExtractor;
+import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +34,7 @@ import muhammad.shulhi.muhibush.vetsub.R;
 import muhammad.shulhi.muhibush.vetsub.adapter.ChatAdapter;
 import muhammad.shulhi.muhibush.vetsub.model.Message;
 import muhammad.shulhi.muhibush.vetsub.other.WsConfig;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,8 +65,7 @@ public class ChatFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import muhammad.shulhi.muhibush.vetsub.model.Dokter;
 import muhammad.shulhi.muhibush.vetsub.model.Event;
 import muhammad.shulhi.muhibush.vetsub.model.Toko;
+<<<<<<< HEAD
+=======
+import muhammad.shulhi.muhibush.vetsub.model.User;
+>>>>>>> e3bf65e6b20371c9b57e746d1c6711c8cb23c0d6
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -39,7 +43,16 @@ public class ApiServices {
             .addConverterFactory(GsonConverterFactory.create()).build().create(ApiServices.DeleteService.class);
 
     public interface PostService {
+<<<<<<< HEAD
 
+=======
+        @FormUrlEncoded
+        @POST("login/client")
+        Call<User> login(
+                @Field("email") String email,
+                @Field("password") String password
+        );
+>>>>>>> e3bf65e6b20371c9b57e746d1c6711c8cb23c0d6
     }
 
     public interface GetService {

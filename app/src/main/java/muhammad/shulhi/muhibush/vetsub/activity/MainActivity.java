@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -12,8 +13,10 @@ import muhammad.shulhi.muhibush.vetsub.R;
 import muhammad.shulhi.muhibush.vetsub.fragment.ChatFragment;
 import muhammad.shulhi.muhibush.vetsub.fragment.DokterFragment;
 import muhammad.shulhi.muhibush.vetsub.fragment.TokoFragment;
+import muhammad.shulhi.muhibush.vetsub.sharedPref.SharedPrefLogin;
 
 public class MainActivity extends AppCompatActivity {
+    private SharedPrefLogin sharedPrefLogin;
     private int prev;
 
     private TextView mTextMessage;
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPrefLogin = new SharedPrefLogin(MainActivity.this);
+        Log.d("onCreate: ", sharedPrefLogin.getID());
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
