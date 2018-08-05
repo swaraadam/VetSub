@@ -28,11 +28,11 @@ public class ProfileActivityToko extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_toko);
-        ivFoto = (ImageView) findViewById(R.id.ib_foto);
-        tvNama = (TextView) findViewById(R.id.tv_nama);
-        tvEmail = (TextView) findViewById(R.id.tv_email);
-        tvTelepon = (TextView) findViewById(R.id.tv_telepon);
-        tvAlamat = (TextView) findViewById(R.id.tv_alamat);
+        ivFoto = findViewById(R.id.ib_foto);
+        tvNama = findViewById(R.id.tv_nama);
+        tvEmail = findViewById(R.id.tv_email);
+        tvTelepon = findViewById(R.id.tv_telepon);
+        tvAlamat = findViewById(R.id.tv_alamat);
 
         final Intent intent = getIntent();
         Log.d( "onCreate: ",intent.getStringExtra(EXTRA_ID_PROFILE));

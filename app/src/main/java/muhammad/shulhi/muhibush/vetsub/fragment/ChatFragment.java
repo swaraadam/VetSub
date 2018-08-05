@@ -1,13 +1,13 @@
 package muhammad.shulhi.muhibush.vetsub.fragment;
 
 
-import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -69,9 +69,9 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        rcMessage = (RecyclerView) view.findViewById(R.id.rc_view_message);
-        etMessage = (EditText) view.findViewById(R.id.et_message);
-        btnSend = (Button) view.findViewById(R.id.btn_send);
+        rcMessage = view.findViewById(R.id.rc_view_message);
+        etMessage = view.findViewById(R.id.et_message);
+        btnSend = view.findViewById(R.id.btn_send);
 
         preferences = getContext().getSharedPreferences(KEY_SHARED_PREF, Context.MODE_PRIVATE);
         editor = preferences.edit();

@@ -62,7 +62,7 @@ public class TokoFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (activity instanceof Activity) {
-            this.activity = (Activity) activity;
+            this.activity = activity;
         }
     }
 
@@ -78,9 +78,9 @@ public class TokoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_toko, container, false);
-        rvToko = (RecyclerView) view.findViewById(R.id.rv_toko);
+        rvToko = view.findViewById(R.id.rv_toko);
         sharedPrefLogin = new SharedPrefLogin(getActivity());
-        btnLogout = (Button) view.findViewById(R.id.btn_logout);
+        btnLogout = view.findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,8 +92,8 @@ public class TokoFragment extends Fragment {
         });
 
         setHasOptionsMenu(true);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        searchView = (MaterialSearchView) view.findViewById(R.id.search_view);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        searchView = view.findViewById(R.id.search_view);
         ((AppCompatActivity) activity).setSupportActionBar(toolbar);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
@@ -128,7 +128,7 @@ public class TokoFragment extends Fragment {
             }
         });
 
-        rlMap = (RelativeLayout) view.findViewById(R.id.rl_map);
+        rlMap = view.findViewById(R.id.rl_map);
         rlMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

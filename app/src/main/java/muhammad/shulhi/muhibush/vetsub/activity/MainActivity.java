@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         sharedPrefLogin = new SharedPrefLogin(MainActivity.this);
         Log.d("onCreate: ", sharedPrefLogin.getID());
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mTextMessage = findViewById(R.id.message);
+        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_main,new TokoFragment()).commit();
     }

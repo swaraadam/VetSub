@@ -31,14 +31,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        linkLogin = (TextView) findViewById(R.id.link_login);
+        linkLogin = findViewById(R.id.link_login);
         linkLogin.setOnClickListener(this);
-        btnRegister = (Button) findViewById(R.id.btn_register);
+        btnRegister = findViewById(R.id.btn_register);
         btnRegister.setOnClickListener(this);
-        etNama = (EditText) findViewById(R.id.et_nama);
-        etEmail = (EditText) findViewById(R.id.et_email);
-        etPassword = (EditText) findViewById(R.id.et_password);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        etNama = findViewById(R.id.et_nama);
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+        progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
     }
 
