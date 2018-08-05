@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegisterActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -23,12 +22,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="72dp"
-            android:layout_marginBottom="10dp"
             android:text="VetSub"
             android:textColor="@android:color/white"
             android:fontFamily="@font/arialround"
             android:textSize="40dp"
             android:layout_gravity="center_horizontal" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/et_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Nama"/>
+        </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
@@ -56,16 +66,17 @@
                 android:hint="Password"/>
         </android.support.design.widget.TextInputLayout>
 
+        <!-- Password Label -->
+
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:textColor="@android:color/white"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="10dp"
             android:padding="12dp"
-            android:text="Login"/>
+            android:text="Register"/>
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -79,11 +90,10 @@
             android:indeterminateTint="#1a09d6"
             android:layout_marginTop="-7dp"/>
 
-        <TextView android:id="@+id/link_register"
+        <TextView android:id="@+id/link_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:text="Belum memiliki akun ? Buat akun"
+            android:text="Sudah memiliki akun ? Login"
             android:gravity="center"
             android:textSize="16dip"/>
 

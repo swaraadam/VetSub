@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText etEmail,etPassword;
     private SharedPrefLogin sharedPrefLogin;
     private ProgressBar progressBar;
+    private TextView linkRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin.setOnClickListener(this);
         etEmail = (EditText) findViewById(R.id.et_email);
         etPassword = (EditText) findViewById(R.id.et_password);
-
+        linkRegister = (TextView) findViewById(R.id.link_register);
+        linkRegister.setOnClickListener(this);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
 
@@ -72,6 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(LoginActivity.this, "Akun belum terdaftar !", Toast.LENGTH_SHORT).show();
                     }
                 });
+                break;
+            case R.id.link_register:
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                finish();
+                break;
         }
     }
 }

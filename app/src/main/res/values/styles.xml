@@ -17,7 +17,7 @@
         <item name="searchSuggestionIcon">@drawable/ic_suggestion</item>
         <item name="searchSuggestionBackground">@color/colorWhite</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:hint">Cari event...</item>
+        <item name="android:hint">Cari...</item>
     </style>
 
 </resources>
