@@ -86,7 +86,7 @@ public class ChatFragment extends Fragment {
             public void onClick(View view) {
                 // Sending message to web socket server
                 sendMessageToServer(getSendMessageJSON(etMessage.getText().toString()));
-                Message m = new Message("Afdolash", etMessage.getText().toString(), true);
+                Message m = new Message("Me", etMessage.getText().toString(), true);
                 appendMessage(m);
 
                 // Clearing the input filed once message was sent
