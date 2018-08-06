@@ -20,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
     private Button btnLogin;
     private EditText etEmail,etPassword;
     private SharedPrefLogin sharedPrefLogin;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        sharedPrefLogin.setId(response.body().get_id());
+                        sharedPrefLogin.setId(response.body().get_id(), response.body().getNama());
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         finish();
