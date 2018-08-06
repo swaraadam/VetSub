@@ -109,7 +109,7 @@ public class MapsActivityDokter extends FragmentActivity implements OnMapReadyCa
 //        searchEvent("Healthy Lifestyle Talkshow with Favourite Beauty Care");
         for (int i = 0;i<mTokoList.size();i++){
             if (mTokoList.get(i).getNama().equals(marker.getTitle())){
-                Toast.makeText(MapsActivityDokter.this,mTokoList.get(i).getNama(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MapsActivityDokter.this,mTokoList.get(i).getNama(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MapsActivityDokter.this, ProfileActivityToko.class);
                 intent.putExtra(ProfileActivityToko.EXTRA_ID_PROFILE,mTokoList.get(i).get_id());
                 intent.putExtra(ProfileActivityToko.EXTRA_JENIS_LAYANAN,"dokter");

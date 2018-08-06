@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import muhammad.shulhi.muhibush.vetsub.R;
+import muhammad.shulhi.muhibush.vetsub.model.Dokter;
 import muhammad.shulhi.muhibush.vetsub.model.Toko;
 import muhammad.shulhi.muhibush.vetsub.services.ApiServices;
 import retrofit2.Call;
@@ -21,8 +22,6 @@ public class ProfileActivityToko extends AppCompatActivity {
     private TextView tvNama,tvEmail,tvTelepon,tvAlamat;
     public static final String EXTRA_ID_PROFILE = "200";
     public static final String EXTRA_JENIS_LAYANAN = "201";
-    private Toko toko;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,34 +34,50 @@ public class ProfileActivityToko extends AppCompatActivity {
         tvAlamat = findViewById(R.id.tv_alamat);
 
         final Intent intent = getIntent();
-        Log.d( "onCreate: ",intent.getStringExtra(EXTRA_ID_PROFILE));
-        ApiServices.service_get.toko_getone(intent.getStringExtra(EXTRA_ID_PROFILE)).enqueue(new Callback<Toko>() {
-            @Override
-            public void onResponse(Call<Toko> call, Response<Toko> response) {
-                toko = response.body();
 
-                if (intent.getStringExtra(EXTRA_JENIS_LAYANAN).equals("dokter")){
+        Log.d( "onCreate: ",intent.getStringExtra(EXTRA_ID_PROFILE));
+        if (intent.getStringExtra(EXTRA_JENIS_LAYANAN).equals("dokter")){
+            ApiServices.service_get.dokter_getone(intent.getStringExtra(EXTRA_ID_PROFILE)).enqueue(new Callback<Dokter>() {
+                @Override
+                public void onResponse(Call<Dokter> call, Response<Dokter> response) {
+                    Dokter dokter = response.body();
                     Glide.with(ProfileActivityToko.this)
-                            .load("http://vetsub.herokuapp.com/images/dokter/"+toko.getFoto())
+                            .load("http://vetsub.herokuapp.com/images/dokter/"+dokter.getFoto())
                             .into(ivFoto);
+
+                    tvNama.setText(dokter.getNama());
+                    tvEmail.setText(dokter.getEmail());
+                    tvTelepon.setText(dokter.getTelepon());
+                    tvAlamat.setText(dokter.getAlamat());
                 }
-                else {
+
+                @Override
+                public void onFailure(Call<Dokter> call, Throwable t) {
+
+                }
+            });
+        }
+        else {
+            ApiServices.service_get.toko_getone(intent.getStringExtra(EXTRA_ID_PROFILE)).enqueue(new Callback<Toko>() {
+                @Override
+                public void onResponse(Call<Toko> call, Response<Toko> response) {
+                    Toko toko = response.body();
                     Glide.with(ProfileActivityToko.this)
                             .load("http://vetsub.herokuapp.com/images/petcare/"+toko.getFoto())
                             .into(ivFoto);
+
+                    tvNama.setText(toko.getNama());
+                    tvEmail.setText(toko.getEmail());
+                    tvTelepon.setText(toko.getTelepon());
+                    tvAlamat.setText(toko.getAlamat());
                 }
 
-                tvNama.setText(toko.getNama());
-                tvEmail.setText(toko.getEmail());
-                tvTelepon.setText(toko.getTelepon());
-                tvAlamat.setText(toko.getAlamat());
-            }
+                @Override
+                public void onFailure(Call<Toko> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<Toko> call, Throwable t) {
-
-            }
-        });
+                }
+            });
+        }
 
     }
 }
