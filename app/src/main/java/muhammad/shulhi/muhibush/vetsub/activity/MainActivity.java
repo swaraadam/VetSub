@@ -89,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
         client = new WebSocketClient(URI.create(WsConfig.URL_WEBSOCKET)) {
             @Override
             public void onOpen(ServerHandshake handshakedata) {
+                // Sending message to web socket server
+                JSONObject jObj = new JSONObject();
+                try {
+                    jObj.put("token", sharedPrefLogin.getID());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                client.send(jObj.toString());
             }
 
             @Override
@@ -122,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
                 showToast("Error! : "+ ex);
             }
         };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         client.connect();
     }
 
@@ -139,14 +152,6 @@ public class MainActivity extends AppCompatActivity {
      * */
     public void sendMessageToServer(String message) {
         if (client != null && client.isOpen()) {
-            // Sending message to web socket server
-            JSONObject jObj = new JSONObject();
-            try {
-                jObj.put("token", "5b608dbd0cf3ab1f1c0d7318");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            client.send(jObj.toString());
             client.send(message);
             Log.d("Data send", message);
         }
@@ -166,6 +171,13 @@ public class MainActivity extends AppCompatActivity {
                 playBeep();
             }
         });
+    }
+
+    /**
+     * Get list message
+     * */
+    public List<Message> getListMessage() {
+        return listMessage;
     }
 
     /**
