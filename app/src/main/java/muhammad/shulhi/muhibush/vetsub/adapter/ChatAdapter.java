@@ -68,8 +68,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            tvMsgFrom = (TextView) itemView.findViewById(R.id.tv_msg_from);
-            tvMsg = (TextView) itemView.findViewById(R.id.tv_msg);
+            tvMsgFrom = itemView.findViewById(R.id.tv_msg_from);
+            tvMsg = itemView.findViewById(R.id.tv_msg);
         }
     }
 }

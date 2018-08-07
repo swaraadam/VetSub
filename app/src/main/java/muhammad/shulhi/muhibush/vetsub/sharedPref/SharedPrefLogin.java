@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 public class SharedPrefLogin {
     private final String PREF_NAME = "Pref_Login";
     private final String KEY_ID = "key_id";
+    private final String KEY_SESSION_NAME = "sessionName";
+
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -14,9 +16,14 @@ public class SharedPrefLogin {
         editor = sharedPreferences.edit();
     }
 
-    public void setId(String id){
+    public void setId(String id, String name){
+        editor.putString(KEY_SESSION_NAME,name);
         editor.putString(KEY_ID,id);
         editor.commit();
+    }
+
+    public String getName() {
+        return sharedPreferences.getString(KEY_SESSION_NAME,null);
     }
 
     public String getID(){

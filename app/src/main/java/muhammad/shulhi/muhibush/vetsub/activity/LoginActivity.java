@@ -20,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
     private Button btnLogin;
     private EditText etEmail,etPassword;
     private SharedPrefLogin sharedPrefLogin;
@@ -30,13 +31,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
-        etEmail = (EditText) findViewById(R.id.et_email);
-        etPassword = (EditText) findViewById(R.id.et_password);
-        linkRegister = (TextView) findViewById(R.id.link_register);
+        etEmail = findViewById(R.id.et_email);
+        etPassword = findViewById(R.id.et_password);
+        linkRegister = findViewById(R.id.link_register);
         linkRegister.setOnClickListener(this);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.INVISIBLE);
 
         sharedPrefLogin = new SharedPrefLogin(LoginActivity.this);
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        sharedPrefLogin.setId(response.body().get_id());
+                        sharedPrefLogin.setId(response.body().get_id(), response.body().getNama());
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         finish();
