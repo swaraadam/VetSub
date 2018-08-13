@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,21 +19,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileActivityToko extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
     private ImageView ivFoto;
-    private TextView tvNama,tvEmail,tvTelepon,tvAlamat;
+    private TextView tvNama,tvEmail,tvTelepon,tvAlamat,tvKeterangan;
+    private LinearLayout llKeterangan;
     public static final String EXTRA_ID_PROFILE = "200";
     public static final String EXTRA_JENIS_LAYANAN = "201";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_toko);
+        setContentView(R.layout.activity_profile);
         ivFoto = findViewById(R.id.ib_foto);
         tvNama = findViewById(R.id.tv_nama);
         tvEmail = findViewById(R.id.tv_email);
         tvTelepon = findViewById(R.id.tv_telepon);
         tvAlamat = findViewById(R.id.tv_alamat);
+        tvKeterangan = findViewById(R.id.tv_keterangan);
+        llKeterangan = findViewById(R.id.ll_keterangan);
 
         final Intent intent = getIntent();
 
@@ -41,7 +46,7 @@ public class ProfileActivityToko extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Dokter> call, Response<Dokter> response) {
                     Dokter dokter = response.body();
-                    Glide.with(ProfileActivityToko.this)
+                    Glide.with(ProfileActivity.this)
                             .load("http://vetsub.herokuapp.com/images/dokter/"+dokter.getFoto())
                             .into(ivFoto);
 
@@ -49,6 +54,7 @@ public class ProfileActivityToko extends AppCompatActivity {
                     tvEmail.setText(dokter.getEmail());
                     tvTelepon.setText(dokter.getTelepon());
                     tvAlamat.setText(dokter.getAlamat());
+                    llKeterangan.setVisibility(View.GONE);
                 }
 
                 @Override
@@ -62,7 +68,7 @@ public class ProfileActivityToko extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Toko> call, Response<Toko> response) {
                     Toko toko = response.body();
-                    Glide.with(ProfileActivityToko.this)
+                    Glide.with(ProfileActivity.this)
                             .load("http://vetsub.herokuapp.com/images/petcare/"+toko.getFoto())
                             .into(ivFoto);
 
@@ -70,6 +76,13 @@ public class ProfileActivityToko extends AppCompatActivity {
                     tvEmail.setText(toko.getEmail());
                     tvTelepon.setText(toko.getTelepon());
                     tvAlamat.setText(toko.getAlamat());
+
+                    if (toko.getKeterangan()!=null){
+                        tvKeterangan.setText(toko.getKeterangan());
+                    }else {
+                        llKeterangan.setVisibility(View.GONE);
+                    }
+
                 }
 
                 @Override

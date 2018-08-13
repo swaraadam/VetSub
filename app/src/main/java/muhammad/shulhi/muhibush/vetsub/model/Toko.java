@@ -20,6 +20,7 @@ public class Toko{
     private Jam jam;
     private Posisi posisi;
     private String search;
+    private String keterangan;
 
     public String getSearch() {
         return search;
@@ -71,5 +72,9 @@ public class Toko{
 
     public Posisi getPosisi() {
         return posisi;
+    }
+
+    public String getKeterangan() {
+        return keterangan;
     }
 }

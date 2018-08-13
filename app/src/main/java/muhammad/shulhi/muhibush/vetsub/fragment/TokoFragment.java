@@ -34,7 +34,7 @@ import java.util.List;
 import muhammad.shulhi.muhibush.vetsub.R;
 import muhammad.shulhi.muhibush.vetsub.activity.LoginActivity;
 import muhammad.shulhi.muhibush.vetsub.activity.MapsActivityToko;
-import muhammad.shulhi.muhibush.vetsub.activity.ProfileActivityToko;
+import muhammad.shulhi.muhibush.vetsub.activity.ProfileActivity;
 import muhammad.shulhi.muhibush.vetsub.model.Toko;
 import muhammad.shulhi.muhibush.vetsub.services.ApiServices;
 import muhammad.shulhi.muhibush.vetsub.sharedPref.SharedPrefLogin;
@@ -173,9 +173,9 @@ public class TokoFragment extends Fragment {
                                     @Override
                                     public void onClick(View view) {
                                         Log.d("Clicked","ok");
-                                        Intent intent = new Intent(getContext(), ProfileActivityToko.class);
-                                        intent.putExtra(ProfileActivityToko.EXTRA_ID_PROFILE,data.get_id());
-                                        intent.putExtra(ProfileActivityToko.EXTRA_JENIS_LAYANAN,"toko");
+                                        Intent intent = new Intent(getContext(), ProfileActivity.class);
+                                        intent.putExtra(ProfileActivity.EXTRA_ID_PROFILE,data.get_id());
+                                        intent.putExtra(ProfileActivity.EXTRA_JENIS_LAYANAN,"toko");
                                         startActivity(intent);
 
                                     }

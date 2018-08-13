@@ -110,9 +110,9 @@ public class MapsActivityToko extends FragmentActivity implements OnMapReadyCall
         for (int i = 0;i<mTokoList.size();i++){
             if (mTokoList.get(i).getNama().equals(marker.getTitle())){
                 Toast.makeText(MapsActivityToko.this,mTokoList.get(i).getNama(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MapsActivityToko.this, ProfileActivityToko.class);
-                intent.putExtra(ProfileActivityToko.EXTRA_ID_PROFILE,mTokoList.get(i).get_id());
-                intent.putExtra(ProfileActivityToko.EXTRA_JENIS_LAYANAN,"toko");
+                Intent intent = new Intent(MapsActivityToko.this, ProfileActivity.class);
+                intent.putExtra(ProfileActivity.EXTRA_ID_PROFILE,mTokoList.get(i).get_id());
+                intent.putExtra(ProfileActivity.EXTRA_JENIS_LAYANAN,"toko");
                 startActivity(intent);
             }
         }
