@@ -5,5 +5,5 @@ package muhammad.shulhi.muhibush.vetsub.other;
  */
 
 public class WsConfig {
-    public static final String URL_WEBSOCKET = "ws://172.20.10.12:3000";
+    public static final String URL_WEBSOCKET = "ws://vetsub.herokuapp.com";
 }
