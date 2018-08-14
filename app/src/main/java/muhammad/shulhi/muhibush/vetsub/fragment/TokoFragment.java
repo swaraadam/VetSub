@@ -42,6 +42,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.support.constraint.Constraints.TAG;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -104,20 +106,36 @@ public class TokoFragment extends Fragment {
                 ArrayList<Toko> UnFilter = new ArrayList<>();
 
                 for (Toko toko:listTokoOriginal){
-                    if (toko.getAlamat().toLowerCase().contains(query.toLowerCase())){
-                        Filter.add(toko);
-                        found = true;
+                    if (toko.getKeterangan()!=null){
+                        if (toko.getAlamat().toLowerCase().contains(query.toLowerCase())||toko.getKeterangan().toLowerCase().contains(query.toLowerCase())){
+                            Filter.add(toko);
+                            found = true;
+                            Log.d(TAG, "1");
+                        }
+
+                        else{
+                            UnFilter.add(toko);
+                        }
                     }
-                    else{
-                        UnFilter.add(toko);
+                    if (toko.getKeterangan()==null){
+                        if (toko.getAlamat().toLowerCase().contains(query.toLowerCase())){
+                            Filter.add(toko);
+                            found = true;
+                            Log.d(TAG, "2");
+                        }
+
+                        else{
+                            UnFilter.add(toko);
+                        }
                     }
                 }
                 listTokoFilter.addAll(Filter);
                 listTokoFilter.addAll(UnFilter);
+                Log.d(TAG, String.valueOf(listTokoFilter.size()));
                 displayTokoRecycler(listTokoFilter);
 
                 if (!found){
-                    Toast.makeText(activity,"Toko dengan Alamat "+query.toString()+" tidak ditemukan",Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,"Keyword \""+query.toString()+"\" tidak ditemukan",Toast.LENGTH_LONG).show();
                 }
                 return false;
             }
