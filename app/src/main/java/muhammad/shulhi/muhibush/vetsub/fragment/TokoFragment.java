@@ -3,6 +3,7 @@ package muhammad.shulhi.muhibush.vetsub.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -100,48 +101,55 @@ public class TokoFragment extends Fragment {
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
                 Boolean found = false;
                 listTokoFilter.clear();
                 ArrayList<Toko> Filter = new ArrayList<>();
                 ArrayList<Toko> UnFilter = new ArrayList<>();
 
-                for (Toko toko:listTokoOriginal){
-                    if (toko.getKeterangan()!=null){
-                        if (toko.getAlamat().toLowerCase().contains(query.toLowerCase())||toko.getKeterangan().toLowerCase().contains(query.toLowerCase())){
-                            Filter.add(toko);
-                            found = true;
-                            Log.d(TAG, "1");
-                        }
+                if(newText.equals(null)){
+                    Log.d(TAG, "pertama");
+                    Filter.addAll(listTokoOriginal);
+                    found = true;
+                }
+                else {
+                    for (Toko toko:listTokoOriginal){
+                        if (toko.getKeterangan()!=null){
+                            if (toko.getAlamat().toLowerCase().contains(newText.toLowerCase())||toko.getKeterangan().toLowerCase().contains(newText.toLowerCase())){
+                                Filter.add(toko);
+                                found = true;
+                                Log.d(TAG, "1");
+                            }
 
-                        else{
-                            UnFilter.add(toko);
+//                            else{
+//                                UnFilter.add(toko);
+//                            }
                         }
-                    }
-                    if (toko.getKeterangan()==null){
-                        if (toko.getAlamat().toLowerCase().contains(query.toLowerCase())){
-                            Filter.add(toko);
-                            found = true;
-                            Log.d(TAG, "2");
-                        }
+                        if (toko.getKeterangan()==null){
+                            if (toko.getAlamat().toLowerCase().contains(newText.toLowerCase())){
+                                Filter.add(toko);
+                                found = true;
+                                Log.d(TAG, "2");
+                            }
 
-                        else{
-                            UnFilter.add(toko);
+//                            else{
+//                                UnFilter.add(toko);
+//                            }
                         }
                     }
                 }
                 listTokoFilter.addAll(Filter);
-                listTokoFilter.addAll(UnFilter);
+//                listTokoFilter.addAll(UnFilter);
                 Log.d(TAG, String.valueOf(listTokoFilter.size()));
                 displayTokoRecycler(listTokoFilter);
 
                 if (!found){
-                    Toast.makeText(activity,"Keyword \""+query.toString()+"\" tidak ditemukan",Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,"Keyword \""+newText.toString()+"\" tidak ditemukan",Toast.LENGTH_LONG).show();
                 }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
